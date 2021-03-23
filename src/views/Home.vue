@@ -2,8 +2,17 @@
   <div>
     <nav class="nav">
       <h2 class="nav__header">Blåbär Webbshop</h2>
-      <div class="nav__cart">
-        <button class="showcart__button" @click="showCart = !showCart">
+      <div class="nav__icons">
+        <button class="nav__buttons">
+          <i class="fas fa-sign-in-alt"></i>
+        </button>
+        <button class="nav__buttons">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+        <button class="nav__buttons">
+          <i class="fas fa-user"></i>
+        </button>
+        <button class="nav__buttons" @click="showCart = !showCart">
           <i class="fas fa-shopping-cart"></i>
         </button>
         <span class="total-quantity">{{ totalQuantity }}</span>
@@ -30,15 +39,8 @@
         />
         <p class="product desctription">{{ product.description }}</p>
         <div class="quantity">
-          <button
-            @click="updateCart(product, 'subtract')"
-            class="quantity__button"
-          >
-            -
-          </button>
-          <span class="quantity__quantity">{{ product.quantity }}</span>
-          <button @click="updateCart(product, 'add')" class="quantity__button">
-            +
+          <button @click="addToCart(product)" class="quantity__button">
+            Köp
           </button>
         </div>
       </div>
@@ -54,19 +56,55 @@ export default {
         {
           id: 1,
           name: "Speldator",
-          description: "This is an incredibly awesome product",
+          description: "Beskrivning av produkten",
           quantity: 0,
         },
         {
           id: 2,
           name: "Laptop",
-          description: "This is an incredibly awesome product",
+          description: "Beskrivning av produkten",
           quantity: 0,
         },
         {
           id: 3,
           name: "Skärm",
-          description: "This is an incredibly awesome product",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 4,
+          name: "Router",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 5,
+          name: "Skrivare",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 6,
+          name: "Server",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 7,
+          name: "Norton Antivirus",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 8,
+          name: "Microsoft Office",
+          description: "Beskrivning av produkten",
+          quantity: 0,
+        },
+        {
+          id: 9,
+          name: "Tangentbord",
+          description: "Beskrivning av produkten",
           quantity: 0,
         },
       ],
@@ -85,17 +123,10 @@ export default {
     },
   },
   methods: {
-    updateCart(product, updateType) {
+    addToCart(product) {
       for (let i = 0; i < this.products.length; i++) {
         if (this.products[i].id === product.id) {
-          if (updateType === "subtract") {
-            if (this.products[i].quantity !== 0) {
-              this.products[i].quantity--;
-            }
-          } else {
-            this.products[i].quantity++;
-          }
-          break;
+          this.products[i].quantity++;
         }
       }
     },
@@ -109,10 +140,6 @@ export default {
   font-weight: normal;
   margin: 0;
   padding: 0;
-}
-
-html {
-  font-size: 10px;
 }
 
 .checkout__button {
@@ -145,12 +172,13 @@ html {
     font-size: 2.5rem;
   }
 
-  &__cart {
+  &__icons {
     position: relative;
 
-    .showcart__button {
+    .nav__buttons {
       background: none;
       border: 0;
+      margin-left: 10px;
       outline: none;
       color: white;
       cursor: pointer;
@@ -170,7 +198,7 @@ html {
       justify-content: center;
       padding: 0.5rem;
       position: absolute;
-      right: -10px;
+      right: -20px;
       top: -10px;
       width: 2rem;
     }
@@ -203,6 +231,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 9rem;
 
   .product {
     border: 1px solid lightgray;
@@ -232,7 +261,7 @@ html {
   text-align: center;
 
   &__button {
-    background: lightblue;
+    background: rgb(10, 113, 148);
     border: 0;
     border-radius: 10px;
     outline: none;
@@ -241,12 +270,7 @@ html {
     font-size: 1.5rem;
     font-weight: bold;
     height: 2.5rem;
-    width: 2.5rem;
-  }
-
-  &__quantity {
-    font-size: 1.5rem;
-    margin: 0 1rem;
+    width: 4rem;
   }
 }
 </style>
