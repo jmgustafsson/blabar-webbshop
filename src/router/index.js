@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Cart from "../views/Cart.vue";
+import Checkout from "../views/Checkout.vue";
 
 Vue.use(VueRouter);
 
@@ -12,9 +12,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/cart",
-    name: "cart",
-    component: Cart
+    path: "/checkout",
+    name: "Checkout",
+    component: Checkout
   }
 ];
 

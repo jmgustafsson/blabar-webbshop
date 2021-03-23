@@ -1,12 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav"><router-link to="/"></router-link></div>
+    <Navbar />
     <router-view />
+    <!-- <Checkout /> -->
   </div>
 </template>
 
 <script>
-export default {};
+import Navbar from "./components/Navbar";
+// import Checkout from "./views/Checkout";
+
+export default {
+  components: {
+    Navbar,
+    // Checkout,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
