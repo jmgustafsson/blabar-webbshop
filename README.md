@@ -1,4 +1,4 @@
-# blabar-webbshop
+# vue-shopping-cart
 
 ## Project setup
 ```
