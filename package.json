@@ -27,5 +27,18 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "description": "```\r npm install\r ```",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenseneducation-john-gustafsson/blabar-webbshop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenseneducation-john-gustafsson/blabar-webbshop/issues"
+  },
+  "homepage": "https://github.com/jenseneducation-john-gustafsson/blabar-webbshop#readme"
 }
