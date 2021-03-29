@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: "Checkout",
   computed: {
     products() {
       return this.$store.getters.cartProducts;

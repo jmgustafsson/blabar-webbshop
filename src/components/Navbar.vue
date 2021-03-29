@@ -24,7 +24,7 @@
         <div v-if="showCart" class="cart-dropdown">
           <ul class="cart-dropdown-list">
             <li v-if="cart == 0">Kundvagnen är tom</li>
-            <li v-for="product in cart" :key="product.id">
+            <li v-for="product in cart" :key="product.product_id">
               {{ product.name }} {{ product.price }}:-
               {{ product.quantity + "st" }}
             </li>

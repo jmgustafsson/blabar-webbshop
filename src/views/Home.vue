@@ -3,13 +3,13 @@
     <h1 class="header">Produkter</h1>
     <section class="products">
       <div v-for="product in products" :key="product.id" class="product">
-        <h3 class="product-header">{{ product.name }}</h3>
+        <h3 class="product-header">{{ product.product_name }}</h3>
         <img
           src="https://via.placeholder.com/150"
           :alt="product.name"
           class="product-image"
         />
-        <p class="product-price">{{ product.price }}:-</p>
+        <p class="product-price">{{ product.product_price }}:-</p>
         <div class="buyContainer">
           <button
             @click="addProductToCart(product)"
@@ -25,6 +25,7 @@
 
 <script>
 export default {
+  name: "Home",
   data() {
     return {
       loading: false,
@@ -45,7 +46,7 @@ export default {
 
   created() {
     this.loading = true;
-    this.$store.dispatch("fetchProducts").then(() => {
+    this.$store.dispatch("getProducts").then(() => {
       this.loading = false;
     });
   },
