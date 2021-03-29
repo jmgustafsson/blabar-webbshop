@@ -1,7 +1,8 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import shop from '../api/shop'
+// import shop from '../api/shop'
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -20,10 +21,10 @@ export default new Vuex.Store({
 
         cartProducts(state) {
             return state.cart.map(cartItem => {
-                const product = state.products.find(product => product.id === cartItem.id)
+                const product = state.products.find(product => product.product_id === cartItem.id)
                 return {
-                    name: product.name,
-                    price: product.price,
+                    name: product.product_name,
+                    price: product.product_price,
                     quantity: cartItem.quantity
                 }
             })
@@ -39,29 +40,40 @@ export default new Vuex.Store({
     },
 
     actions: { // = methods
-        fetchProducts({ commit }) {
-            return new Promise((resolve, reject) => {
-                // make the call
-                // run setProducts mutations
-                shop.getProducts((products) => {
-                    commit("setProducts", products);
-                    resolve()
-                });
-            })
+        // fetchProducts({ commit }) {
+        //     return new Promise((resolve, reject) => {
+        //         // make the call
+        //         // run setProducts mutations
+        //         shop.getProducts((products) => {
+        //             commit("setProducts", products);
+        //             resolve()
+        //         });
+        //     })
+        // },
+
+        async getProducts({ commit }) {
+            try {
+                const response = await axios.get("http://localhost:5000/products");
+                this.products = response.data;
+                commit("setProducts", this.products);
+            } catch (err) {
+                console.log(err);
+            }
         },
 
         addProductToCart(context, product) {
             if (product) {
                 // find cartItem
-                const cartItem = context.state.cart.find(item => item.id === product.id)
+                const cartItem = context.state.cart.find(item => item.id === product.product_id)
                 if (!cartItem) {
                     // pushProductToCart
-                    context.commit("pushProductToCart", product.id)
+                    context.commit("pushProductToCart", product.product_id);
+                    console.log(this.pushProductToCart);
                 } else {
                     // incrementItemQuantity
                     context.commit("incrementItemQuantity", cartItem)
                 }
-                context.commit("decrementProductInventory", product)
+                // context.commit("decrementProductInventory", product)
             }
         },
 
@@ -96,9 +108,9 @@ export default new Vuex.Store({
             cartItem.quantity++
         },
 
-        decrementProductInventory(state, product) {
-            product.inventory--
-        },
+        // decrementProductInventory(state, product) {
+        //     product.inventory--
+        // },
 
         setCheckoutStatus(state, status) {
             state.checkoutStatus = status
