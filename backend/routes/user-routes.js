@@ -1,15 +1,24 @@
 /*eslint-disable*/
 // routes/router.js
 
-const express = require('express');
+import express from "express";
+// const express = require('express');
+
 const router = express.Router();
 
-const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
-const jwt = require('jsonwebtoken');
+import bcrypt from "bcryptjs";
+// const bcrypt = require('bcryptjs');
 
-const db = require('../lib/db.js');
-const userMiddleware = require('../middleware/users.js');
+import uuid from "vue-uuid";
+
+import jwt from "jsonwebtoken"
+// const jwt = require('jsonwebtoken')i
+
+import db from "../config/database";
+// const db = require('../lib/db.js');
+
+import userMiddleware from "../middleware/users.js";
+// const userMiddleware = require('../middleware/users.js');
 
 
 router.post('/signup', userMiddleware.validateRegister, (req, res, next) => {

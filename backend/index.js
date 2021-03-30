@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import Router from "./routes/routes.js";
-import userRouter from "./routes/user-routes.js";
+// const  userRouter = require("./routes/user-routes.js");
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(cors());
 
 
 
-app.use('/api', userRouter);
+// app.use('/api', userRouter);
 
 app.use(Router);
 

@@ -1,8 +1,8 @@
 // middleware/users.js
 
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-module.exports = {
+export default {
   
   validateRegister: (req, res, next) => {
     // username min length 3
