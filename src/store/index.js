@@ -4,10 +4,23 @@ import Vuex from 'vuex'
 // import shop from '../api/shop'
 import axios from 'axios';
 
+import createPersistedState from 'vuex-persistedstate';
+
+const getDefaultState = () => {
+    return {
+      token: '',
+      user: {}
+    };
+  };
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    strict: true,
+    plugins: [createPersistedState()],
     state: { // = data
+        getDefaultState,
         products: [],
         // {id, quantity}
         cart: [],
@@ -15,6 +28,13 @@ export default new Vuex.Store({
     },
 
     getters: { // = computed properties
+
+        isLoggedIn: state => {
+            return state.token;
+          },
+          getUser: state => {
+            return state.user;
+          },
         availableProducts(state, getters) {
             return state.products.filter(product => product)
         },
@@ -50,7 +70,18 @@ export default new Vuex.Store({
         //         });
         //     })
         // },
-
+        login: ({ commit,dispatch  }, { token, user }) => {
+            console.log(dispatch);
+            commit('SET_TOKEN', token);
+            commit('SET_USER', user);
+      
+            // set auth header
+            Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          },
+          logout: ({ commit }) => {
+            commit('RESET', '');
+          },
+          
         async getProducts({ commit }) {
             try {
                 const response = await axios.get("http://localhost:5000/products");
@@ -92,6 +123,16 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        SET_TOKEN: (state, token) => {
+            state.token = token;
+          },
+          SET_USER: (state, user) => {
+            state.user = user;
+          },
+          RESET: state => {
+            Object.assign(state, getDefaultState());
+          },
+
         setProducts(state, products) {
             // update products
             state.products = products
