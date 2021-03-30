@@ -8,7 +8,12 @@
         </li>
       </ul>
       <p class="totalsum">Summa: {{ total }}:-</p>
-      <button @click="$store.dispatch('checkout')" class="order-button">
+      <div>
+        <button style="margin-bottom: 10px" class="checkout-button">
+          Rensa
+        </button>
+      </div>
+      <button @click="$store.dispatch('checkout')" class="checkout-button">
         Beställ
       </button>
       <p v-if="$store.state.checkoutStatus">
@@ -65,7 +70,7 @@ ul {
   }
 }
 
-.order-button {
+.checkout-button {
   background: rgb(10, 113, 148);
   border: 0;
   border-radius: 10px;
