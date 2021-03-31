@@ -6,6 +6,8 @@
     <input type="text" placeholder="Username" v-model="username" />
     <input type="text" placeholder="Password" v-model="password" />
     <input type="button" @click="login" value="Login" />
+    <p>Saknar du ett konto? Registrera dig här</p>
+    <router-link to="/signup"><button>Registrera</button></router-link>
     <p v-if="msg">{{ msg }}</p>
   </div>
 </template>

@@ -5,14 +5,21 @@
         <router-link to="/" class="home-link">Blåbär Webbshop</router-link>
       </h2>
       <div class="nav-icons">
+        <router-link to="/login">
+          <button class="nav-buttons">
+            <i class="fas fa-sign-in-alt"></i>
+          </button>
+        </router-link>
+        <router-link to="/signup">
+          <button class="nav-buttons">
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </router-link>
         <button class="nav-buttons">
-          <i class="fas fa-sign-in-alt"></i>
+          <i class="fas fa-user"></i>
         </button>
         <button class="nav-buttons">
           <i class="fas fa-sign-out-alt"></i>
-        </button>
-        <button class="nav-buttons">
-          <i class="fas fa-user"></i>
         </button>
         <button class="nav-buttons" @click="showCart = !showCart">
           <i class="fas fa-shopping-cart"></i>
