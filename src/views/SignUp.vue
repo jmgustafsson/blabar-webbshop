@@ -13,15 +13,15 @@
   </div>
 </template>
 <script>
-import AuthService from '@/services/AuthService.js';
+import AuthService from "@/services/AuthService.js";
 
 export default {
   data() {
     return {
-      username: '',
-      password: '',
-      password_repeat: '',
-      msg: ''
+      username: "",
+      password: "",
+      password_repeat: "",
+      msg: "",
     };
   },
   methods: {
@@ -30,14 +30,14 @@ export default {
         const credentials = {
           username: this.username,
           password: this.password,
-          password_repeat: this.password_repeat
+          password_repeat: this.password_repeat,
         };
         const response = await AuthService.signUp(credentials);
         this.msg = response.msg;
       } catch (error) {
         this.msg = error.response.data.msg;
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -9,18 +9,18 @@
 </template>
 
 <script>
-import AuthService from '@/services/AuthService.js';
+import AuthService from "@/services/AuthService.js";
 
 export default {
   data() {
     return {
-      secretMessage: '',
-      username: ''
+      secretMessage: "",
+      username: "",
     };
   },
   async created() {
     if (!this.$store.getters.isLoggedIn) {
-      this.$router.push('/login');
+      this.$router.push("/login");
     }
 
     this.username = this.$store.getters.getUser.username;
@@ -29,9 +29,9 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
-    }
-  }
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
