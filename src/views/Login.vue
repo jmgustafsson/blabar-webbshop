@@ -37,9 +37,9 @@ export default {
 
         this.$store.dispatch("login", { token, user });
 
-        this.$router.push("/");
+        this.$router.push("/signed");
       } catch (error) {
-        this.msg = error.response.data.msg;
+        console.log(error);
       }
     },
   },

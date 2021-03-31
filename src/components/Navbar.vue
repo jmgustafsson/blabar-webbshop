@@ -15,9 +15,11 @@
             <i class="fas fa-user-plus"></i>
           </button>
         </router-link>
-        <button class="nav-buttons">
-          <i class="fas fa-user"></i>
-        </button>
+        <router-link to="/signed">
+          <button class="nav-buttons">
+            <i class="fas fa-user"></i>
+          </button>
+        </router-link>
         <button class="nav-buttons">
           <i class="fas fa-sign-out-alt"></i>
         </button>
