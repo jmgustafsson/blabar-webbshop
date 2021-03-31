@@ -110,6 +110,10 @@ export default new Vuex.Store({
       context.commit("removeProductFromCart", product.product_id);
     },
 
+    deleteAllProducts(context, product) {
+      context.commit("emptyCart");
+    },
+
     checkout({ state, commit }) {
       shop.buyProducts(
         state.cart,

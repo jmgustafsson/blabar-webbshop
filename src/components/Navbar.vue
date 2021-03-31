@@ -27,12 +27,14 @@
             <li v-for="product in cart" :key="product.product_id">
               {{ product.name }} {{ product.price }}:-
               {{ product.quantity + "st" }}
-              <button @click="removeProduct(product)">X</button>
+              <button @click="removeProduct(product)" class="delete-button">
+                X
+              </button>
             </li>
           </ul>
           <p style="margin-top: 10px">Summa: {{ total }}:-</p>
           <router-link to="/checkout"
-            ><button class="checkout-button" @click="showCart = false">
+            ><button @click="showCart = false" class="checkout-button">
               Kassan
             </button></router-link
           >
@@ -96,13 +98,27 @@ export default {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
-  margin: 0;
+  margin-left: 50px;
 
   a {
     text-decoration: none;
     color: inherit;
     width: 10rem;
   }
+}
+
+.delete-button {
+  background: rgb(10, 113, 148);
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 10px;
 }
 
 .nav {
@@ -160,7 +176,7 @@ export default {
       padding: 0 1rem;
       position: absolute;
       right: 0;
-      width: 16rem;
+      width: 19rem;
 
       .cart-dropdown-list {
         list-style: none;
