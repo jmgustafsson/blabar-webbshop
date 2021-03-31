@@ -5,22 +5,27 @@
         <router-link to="/" class="home-link">Blåbär Webbshop</router-link>
       </h2>
       <div class="nav-icons">
-        <router-link to="/login">
+        <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">
           <button class="nav-buttons">
             <i class="fas fa-sign-in-alt"></i>
           </button>
         </router-link>
-        <router-link to="/signup">
+        <router-link v-if="!this.$store.getters.isLoggedIn" to="/signup">
           <button class="nav-buttons">
             <i class="fas fa-user-plus"></i>
           </button>
         </router-link>
-        <router-link to="/signed">
+        <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
           <button class="nav-buttons">
+            <span v-if="this.$store.getters.isLoggedIn">{{ email }}</span>
             <i class="fas fa-user"></i>
           </button>
         </router-link>
-        <button class="nav-buttons">
+        <button
+          @click="logout"
+          v-if="this.$store.getters.isLoggedIn"
+          class="nav-buttons"
+        >
           <i class="fas fa-sign-out-alt"></i>
         </button>
         <button class="nav-buttons" @click="showCart = !showCart">
@@ -58,7 +63,16 @@ export default {
   data() {
     return {
       showCart: false,
+      email: "",
+      loggedStatus: false,
     };
+  },
+
+  async created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.email = this.$store.getters.getUser.email;
+      this.loggedStatus = true;
+    }
   },
 
   computed: {
@@ -76,6 +90,11 @@ export default {
   },
 
   methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
+    },
+
     removeProduct(product) {
       this.$store.dispatch("deleteProductFromCart", product);
     },

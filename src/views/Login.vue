@@ -29,6 +29,9 @@ export default {
           username: this.username,
           password: this.password,
         };
+
+        window.emailAdress = this.username;
+
         const response = await AuthService.login(credentials);
         this.msg = response.msg;
 
@@ -37,7 +40,7 @@ export default {
 
         this.$store.dispatch("login", { token, user });
 
-        this.$router.push("/signed");
+        this.$router.push("/");
       } catch (error) {
         console.log(error);
       }
