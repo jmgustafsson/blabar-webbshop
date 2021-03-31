@@ -10,14 +10,14 @@
   </div>
 </template>
 <script>
-import AuthService from '@/services/AuthService.js';
+import AuthService from "@/services/AuthService.js";
 
 export default {
   data() {
     return {
-      username: '',
-      password: '',
-      msg: ''
+      username: "",
+      password: "",
+      msg: "",
     };
   },
   methods: {
@@ -25,7 +25,7 @@ export default {
       try {
         const credentials = {
           username: this.username,
-          password: this.password
+          password: this.password,
         };
         const response = await AuthService.login(credentials);
         this.msg = response.msg;
@@ -33,13 +33,13 @@ export default {
         const token = response.token;
         const user = response.user;
 
-        this.$store.dispatch('login', { token, user });
+        this.$store.dispatch("login", { token, user });
 
-        this.$router.push('/');
+        this.$router.push("/");
       } catch (error) {
         this.msg = error.response.data.msg;
       }
-    }
-  }
+    },
+  },
 };
 </script>

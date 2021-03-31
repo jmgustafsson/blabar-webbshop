@@ -27,6 +27,7 @@
             <li v-for="product in cart" :key="product.product_id">
               {{ product.name }} {{ product.price }}:-
               {{ product.quantity + "st" }}
+              <button @click="removeProduct(product)">X</button>
             </li>
           </ul>
           <p style="margin-top: 10px">Summa: {{ total }}:-</p>
@@ -60,6 +61,12 @@ export default {
 
     total() {
       return this.$store.getters.cartTotal;
+    },
+  },
+
+  methods: {
+    removeProduct(product) {
+      this.$store.dispatch("deleteProductFromCart", product);
     },
   },
 };
