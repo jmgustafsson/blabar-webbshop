@@ -29,6 +29,9 @@ export default {
           username: this.username,
           password: this.password,
         };
+
+        window.emailAdress = this.username;
+
         const response = await AuthService.login(credentials);
         this.msg = response.msg;
 
