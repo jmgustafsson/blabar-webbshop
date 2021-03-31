@@ -4,7 +4,7 @@ import Home from "../views/Home.vue";
 import Checkout from "../views/Checkout.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
-import Signed from "../views/Signed.vue";
+import History from "../views/History.vue";
 
 Vue.use(VueRouter);
 
@@ -30,9 +30,9 @@ const routes = [
     component: Login,
   },
   {
-    path: "/signed",
-    name: "signed",
-    component: Signed,
+    path: "/history",
+    name: "history",
+    component: History,
   },
 ];
 

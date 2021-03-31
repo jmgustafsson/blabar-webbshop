@@ -122,4 +122,30 @@ router.get("/secret-route", userMiddleware.isLoggedIn, (req, res, next) => {
   res.send("This is the secret content. Only logged in users can see that!");
 });
 
+router.post("/history", (req, res, next) => {
+  var emailAdress = req.body.params.userEmail;
+
+  var queryHistory =
+    'SELECT * FROM history WHERE userEmail = "' + emailAdress + '"';
+  // + req.body.email;
+  // var queryHistory = (`SELECT product FROM history WHERE LOWER(userEmail) = ?`, [email]);
+  // sql = mysql.format(`SELECT * FROM history WHERE LOWER(userEmail) = "LOWER(${db.escape(?)});"`,req.body.email)
+  console.log(req.body.params.userEmail);
+  console.log(queryHistory);
+
+  db.query(queryHistory, (err, data, fields) => {
+    if (err) throw err;
+    else {
+      var orderHistory = [];
+
+      data.forEach(function(entry) {
+        orderHistory.push(entry);
+      });
+
+      res.json(orderHistory);
+      // console.log(orderHistory);
+    }
+  });
+});
+
 export default router;

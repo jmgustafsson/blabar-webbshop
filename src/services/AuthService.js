@@ -18,4 +18,13 @@ export default {
   getSecretContent() {
     return axios.get(url + "secret-route/").then((response) => response.data);
   },
+  history(emailAdress) {
+    return axios
+      .post(url + "history/", {
+        params: {
+          userEmail: emailAdress,
+        },
+      })
+      .then((response) => response.data);
+  },
 };

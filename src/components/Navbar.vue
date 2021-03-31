@@ -15,7 +15,7 @@
             <i class="fas fa-user-plus"></i>
           </button>
         </router-link>
-        <router-link v-if="this.$store.getters.isLoggedIn" to="/signed">
+        <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
           <button class="nav-buttons">
             <span v-if="this.$store.getters.isLoggedIn">{{ email }}</span>
             <i class="fas fa-user"></i>
