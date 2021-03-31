@@ -1,5 +1,5 @@
 <template>
-  <div class="center-screen">
+  <div>
     <h1 class="header">Kassan</h1>
     <section>
       <ul>
@@ -11,7 +11,7 @@
         </li>
       </ul>
       <p class="totalsum">Summa: {{ total }}:-</p>
-      <button @click="$store.dispatch('checkout')" class="order-button">
+      <button @click="$store.dispatch('order')" class="order-button">
         Beställ
       </button>
       <p v-if="$store.state.checkoutStatus">
@@ -43,7 +43,7 @@ export default {
     },
 
     clearCart(product) {
-      this.$store.dispatch("deleteAllProducts", product);
+      this.$store.dispatch("deleteAllProductsFromCart", product);
     },
   },
 };
@@ -58,7 +58,9 @@ export default {
   font-size: 20px;
 }
 
-.center-screen {
+section {
+  margin: auto;
+  width: 300px;
   text-align: center;
 }
 
@@ -69,7 +71,6 @@ export default {
 }
 
 .totalsum {
-  text-align: center;
   margin: 20px 0;
 }
 
@@ -78,7 +79,8 @@ ul {
   padding: 0;
 
   li {
-    margin: 5px 0;
+    margin: 20px 0;
+    text-align: start;
   }
 }
 
@@ -93,6 +95,7 @@ ul {
   font-weight: bold;
   height: 1.5rem;
   width: 1.5rem;
+  float: right;
 }
 
 .order-button {

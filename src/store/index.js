@@ -110,21 +110,15 @@ export default new Vuex.Store({
       context.commit("removeProductFromCart", product.product_id);
     },
 
-    deleteAllProducts(context, product) {
+    deleteAllProductsFromCart(context, product) {
       context.commit("emptyCart");
     },
 
-    checkout({ state, commit }) {
-      shop.buyProducts(
-        state.cart,
-        () => {
-          commit("emptyCart");
-          commit("setCheckoutStatus", "success");
-        },
-        () => {
-          commit("setCheckoutStatus", "fail");
-        }
-      );
+    order({ state, commit }) {
+      shop.buyProducts(state.cart, () => {
+        commit("emptyCart");
+        commit("setCheckoutStatus", "success");
+      });
     },
   },
 
@@ -142,7 +136,6 @@ export default new Vuex.Store({
     },
 
     setProducts(state, products) {
-      // update products
       state.products = products;
     },
 
@@ -161,12 +154,12 @@ export default new Vuex.Store({
       state.cart.splice(product, 1);
     },
 
-    setCheckoutStatus(state, status) {
-      state.checkoutStatus = status;
-    },
-
     emptyCart(state) {
       state.cart = [];
+    },
+
+    setCheckoutStatus(state, status) {
+      state.checkoutStatus = status;
     },
   },
 });

@@ -118,7 +118,7 @@ export default {
   font-weight: bold;
   height: 1.5rem;
   width: 1.5rem;
-  margin-left: 10px;
+  float: right;
 }
 
 .nav {
