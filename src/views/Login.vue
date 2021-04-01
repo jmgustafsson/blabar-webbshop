@@ -12,9 +12,10 @@
 
     <input class="btn" type="button" @click="login" value="Logga in" />
     <p>Saknar du ett konto? Registrera dig här</p>
-    <router-link to="/signup"
-      ><button class="btn">Registrera</button></router-link
+    <router-link to="/signup">
+      <button class="btn">Registrera</button></router-link
     >
+
     <p v-if="msg">{{ msg }}</p>
   </div>
 </template>
@@ -49,7 +50,7 @@ export default {
 
         this.$router.push("/");
       } catch (error) {
-        console.log(error);
+        this.msg = error.response.data.msg;
       }
     }
   }

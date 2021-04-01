@@ -25,7 +25,7 @@ router.post("/signup", userMiddleware.validateRegister, (req, res, next) => {
     (err, result) => {
       if (result.length) {
         return res.status(409).send({
-          msg: "This username is already in use!",
+          msg: "Den här användarnamnet används redan! :)",
         });
       } else {
         // username is available
@@ -49,7 +49,7 @@ router.post("/signup", userMiddleware.validateRegister, (req, res, next) => {
                   });
                 }
                 return res.status(201).send({
-                  msg: "Registered!",
+                  msg: "Registerad! <3",
                 });
               }
             );
@@ -73,7 +73,7 @@ router.post("/login", (req, res, next) => {
       }
       if (!result.length) {
         return res.status(401).send({
-          msg: "Username or password is incorrect!",
+          msg: "Användarnamn eller lösenord är inkorrekt! :(",
         });
       }
       // check password
@@ -85,7 +85,7 @@ router.post("/login", (req, res, next) => {
           if (bErr) {
             throw bErr;
             return res.status(401).send({
-              msg: "Username or password is incorrect!",
+              msg: "Användarnamn eller lösenord är inkorrekt! :(",
             });
           }
           if (bResult) {
@@ -103,13 +103,13 @@ router.post("/login", (req, res, next) => {
               `UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`
             );
             return res.status(200).send({
-              msg: "Logged in!",
+              msg: "Loggad in! :)",
               token,
               user: result[0],
             });
           }
           return res.status(401).send({
-            msg: "Username or password is incorrect!",
+            msg: "Användarnamn eller lösenord är inkorrekt! :(",
           });
         }
       );

@@ -6,14 +6,14 @@ export default {
     // username min length 3
     if (!req.body.username || req.body.username.length < 3) {
       return res.status(400).send({
-        msg: "Please enter a username with min. 3 chars",
+        msg: "Snälla ange ett användarnamn med minst 3 tecken",
       });
     }
 
     // password min 6 chars
     if (!req.body.password || req.body.password.length < 6) {
       return res.status(400).send({
-        msg: "Please enter a password with min. 6 chars",
+        msg: "Snälla ange ett lösenord med minst 6 tecken",
       });
     }
 
@@ -23,7 +23,7 @@ export default {
       req.body.password != req.body.password_repeat
     ) {
       return res.status(400).send({
-        msg: "Both passwords must match",
+        msg: "Både lösernord måste matcha",
       });
     }
 
@@ -38,7 +38,7 @@ export default {
       next();
     } catch (err) {
       return res.status(401).send({
-        msg: "Your session is not valid!",
+        msg: "Din session är invalid!",
       });
     }
   },
