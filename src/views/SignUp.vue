@@ -1,21 +1,21 @@
 <template>
   <div class="Signup">
-    <h1>Sign Up</h1>
+    <h1>Registrera</h1>
     <div class="textbox">
-      <input type="text" placeholder="Username" v-model="username" />
+      <input type="text" placeholder="Användarnamn" v-model="username" />
     </div>
     <div class="textbox">
-      <input type="text" placeholder="Password" v-model="password" />
+      <input type="text" placeholder="Lösenord" v-model="password" />
     </div>
     <div class="textbox">
       <input
         type="text"
-        placeholder="Password (repeat)"
+        placeholder="Upprepa lösenord"
         v-model="password_repeat"
       />
     </div>
 
-    <input class="btn" type="button" @click="signUp" value="Sign Up" />
+    <input class="btn" type="button" @click="signUp" value="Registrera" />
     <p v-if="msg">{{ msg }}</p>
   </div>
 </template>
@@ -60,11 +60,8 @@ body {
   color: black;
 }
 .Signup {
+  margin: auto;
   width: 280px;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .Signup h1 {
   float: center;

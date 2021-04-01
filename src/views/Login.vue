@@ -2,15 +2,15 @@
 
 <template>
   <div class="login">
-    <h1>Login</h1>
+    <h1>Logga in</h1>
     <div class="textbox">
-      <input type="text" placeholder="Username" v-model="username" />
+      <input type="text" placeholder="Användarnamn" v-model="username" />
     </div>
     <div class="textbox">
-      <input type="text" placeholder="Password" v-model="password" />
+      <input type="text" placeholder="Lösenord" v-model="password" />
     </div>
 
-    <input class="btn" type="button" @click="login" value="Login" />
+    <input class="btn" type="button" @click="login" value="Logga in" />
     <p>Saknar du ett konto? Registrera dig här</p>
     <router-link to="/signup"
       ><button class="btn">Registrera</button></router-link
@@ -64,11 +64,8 @@ body {
   color: black;
 }
 .login {
+  margin: auto;
   width: 280px;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .login h1 {
   float: center;
