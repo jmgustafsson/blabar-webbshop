@@ -11,7 +11,7 @@
         </li>
       </ul>
       <p class="totalsum">Summa: {{ total }}:-</p>
-      <button @click="$store.dispatch('order')" class="order-button">
+      <button @click="placeOrder" class="order-button">
         Beställ
       </button>
       <p v-if="$store.state.checkoutStatus">
@@ -25,8 +25,15 @@
 </template>
 
 <script>
+import AuthService from "@/services/AuthService.js";
+
 export default {
   name: "Checkout",
+  data() {
+    return {
+      orderProducts: [],
+    };
+  },
   computed: {
     products() {
       return this.$store.getters.cartProducts;
@@ -38,6 +45,28 @@ export default {
   },
 
   methods: {
+    async placeOrder() {
+      try {
+        var orderName = new Array();
+        // let orders = this.$store.getters.cartProducts;
+        for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
+          orderName.push(this.$store.getters.cartProducts[i].name);
+        }
+
+        console.log(orderName);
+        // const orderCred = {
+        //   products: this.$store.getters.cartProducts,
+        // };
+
+        const response = await AuthService.orderHistory(
+          orderName,
+          window.emailAdress
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     removeProduct(product) {
       this.$store.dispatch("deleteProductFromCart", product);
     },

@@ -27,4 +27,14 @@ export default {
       })
       .then((response) => response.data);
   },
+  orderHistory(products, emailAdress) {
+    return axios
+      .post(url + "orderhistory/", {
+        params: {
+          user: emailAdress,
+          orderProducts: products,
+        },
+      })
+      .then((response) => response.data);
+  },
 };

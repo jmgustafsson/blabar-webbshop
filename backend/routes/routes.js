@@ -14,8 +14,17 @@ const router = express.Router();
 router.get("/products", showProducts);
 
 // Create New Product
-router.post("/products", createProduct);
-
+router.post("/orderhistory", (req, res, next) => {
+  var username = req.body.params.user;
+  var products = req.body.params.orderProducts;
+  var orderQuery =
+    'INSERT INTO history (userEmail, product, orderPlaced) VALUES ("' +
+    username +
+    '", "' +
+    products +
+    '", now())';
+  db.query(orderQuery);
+});
 router.post("/signup", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
     `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
@@ -140,8 +149,8 @@ router.post("/history", (req, res, next) => {
 
       data.forEach(function(entry) {
         orderHistory.push(entry);
+        console.log(entry);
       });
-
       res.json(orderHistory);
       // console.log(orderHistory);
     }
