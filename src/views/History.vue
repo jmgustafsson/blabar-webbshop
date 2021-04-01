@@ -3,7 +3,7 @@
 <template>
   <div>
     <h1>{{ username }}</h1>
-    <div>
+    <div id="table-div">
       <table id="firstTable">
         <thead>
           <tr>
@@ -60,6 +60,11 @@ export default {
 </script>
 
 <style scoped>
+#table-div {
+  width: 50%;
+  margin: auto;
+}
+
 table {
   font-family: "Open Sans", sans-serif;
   width: 750px;
@@ -71,7 +76,7 @@ table {
 table th {
   text-transform: uppercase;
   text-align: left;
-  background: #44475c;
+  background: rgb(10, 113, 148);
   color: #fff;
   padding: 8px;
   min-width: 30px;
