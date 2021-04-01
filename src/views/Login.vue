@@ -1,13 +1,20 @@
 // src/views/Login.vue
 
 <template>
-  <div>
+  <div class="login">
     <h1>Login</h1>
-    <input type="text" placeholder="Username" v-model="username" />
-    <input type="text" placeholder="Password" v-model="password" />
-    <input type="button" @click="login" value="Login" />
+    <div class="textbox">
+      <input type="text" placeholder="Username" v-model="username" />
+    </div>
+    <div class="textbox">
+      <input type="text" placeholder="Password" v-model="password" />
+    </div>
+
+    <input class="btn" type="button" @click="login" value="Login" />
     <p>Saknar du ett konto? Registrera dig här</p>
-    <router-link to="/signup"><button>Registrera</button></router-link>
+    <router-link to="/signup"
+      ><button class="btn">Registrera</button></router-link
+    >
     <p v-if="msg">{{ msg }}</p>
   </div>
 </template>
@@ -19,7 +26,7 @@ export default {
     return {
       username: "",
       password: "",
-      msg: "",
+      msg: ""
     };
   },
   methods: {
@@ -27,7 +34,7 @@ export default {
       try {
         const credentials = {
           username: this.username,
-          password: this.password,
+          password: this.password
         };
 
         window.emailAdress = this.username;
@@ -44,7 +51,79 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
+
+<style lang="scss">
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+  color: black;
+}
+.login {
+  width: 280px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login h1 {
+  float: center;
+  font-size: 40px;
+  border-bottom: 6px solid rgb(10, 113, 148);
+  margin-top: 50px;
+  padding: 13px 0;
+}
+.textbox {
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  margin: 8px 0;
+  border-bottom: 1px solid rgb(10, 113, 148);
+}
+.textbox input {
+  border: none;
+  outline: none;
+  background: none;
+  color: black;
+  font-size: 18px;
+  width: 100%;
+  float: left;
+  margin: 10px;
+}
+.btn {
+  width: 100%;
+  background: none;
+  border: 2px solid rgb(10, 113, 148);
+  color: black;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
+}
+.logout {
+  width: 100%;
+  background: none;
+  border: 2px solid rgb(10, 113, 148);
+  color: black;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+a {
+  color: inherit;
+}
+</style>
