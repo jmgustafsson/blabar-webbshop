@@ -5,7 +5,7 @@
       <div v-for="product in products" :key="product.id" class="product">
         <h3 class="product-header">{{ product.product_name }}</h3>
         <img
-          src="https://via.placeholder.com/150"
+          src="https://fakeimg.pl/150x150"
           :alt="product.name"
           class="product-image"
         />

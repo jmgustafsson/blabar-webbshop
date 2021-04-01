@@ -5,14 +5,28 @@
         <router-link to="/" class="home-link">Blåbär Webbshop</router-link>
       </h2>
       <div class="nav-icons">
-        <button class="nav-buttons">
-          <i class="fas fa-sign-in-alt"></i>
-        </button>
-        <button class="nav-buttons">
+        <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">
+          <button class="nav-buttons">
+            <i class="fas fa-sign-in-alt"></i>
+          </button>
+        </router-link>
+        <router-link v-if="!this.$store.getters.isLoggedIn" to="/signup">
+          <button class="nav-buttons">
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </router-link>
+        <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
+          <button class="nav-buttons">
+            <span v-if="this.$store.getters.isLoggedIn">{{ email }}</span>
+            <i class="fas fa-user"></i>
+          </button>
+        </router-link>
+        <button
+          @click="logout"
+          v-if="this.$store.getters.isLoggedIn"
+          class="nav-buttons"
+        >
           <i class="fas fa-sign-out-alt"></i>
-        </button>
-        <button class="nav-buttons">
-          <i class="fas fa-user"></i>
         </button>
         <button class="nav-buttons" @click="showCart = !showCart">
           <i class="fas fa-shopping-cart"></i>
@@ -27,11 +41,14 @@
             <li v-for="product in cart" :key="product.product_id">
               {{ product.name }} {{ product.price }}:-
               {{ product.quantity + "st" }}
+              <button @click="removeProduct(product)" class="delete-button">
+                X
+              </button>
             </li>
           </ul>
           <p style="margin-top: 10px">Summa: {{ total }}:-</p>
           <router-link to="/checkout"
-            ><button class="checkout-button" @click="showCart = false">
+            ><button @click="showCart = false" class="checkout-button">
               Kassan
             </button></router-link
           >
@@ -46,7 +63,16 @@ export default {
   data() {
     return {
       showCart: false,
+      email: "",
+      loggedStatus: false,
     };
+  },
+
+  async created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.email = this.$store.getters.getUser.email;
+      this.loggedStatus = true;
+    }
   },
 
   computed: {
@@ -60,6 +86,17 @@ export default {
 
     total() {
       return this.$store.getters.cartTotal;
+    },
+  },
+
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
+    },
+
+    removeProduct(product) {
+      this.$store.dispatch("deleteProductFromCart", product);
     },
   },
 };
@@ -89,13 +126,27 @@ export default {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
-  margin: 0;
+  margin-left: 50px;
 
   a {
     text-decoration: none;
     color: inherit;
     width: 10rem;
   }
+}
+
+.delete-button {
+  background: rgb(10, 113, 148);
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  height: 1.5rem;
+  width: 1.5rem;
+  float: right;
 }
 
 .nav {
@@ -153,7 +204,7 @@ export default {
       padding: 0 1rem;
       position: absolute;
       right: 0;
-      width: 16rem;
+      width: 19rem;
 
       .cart-dropdown-list {
         list-style: none;
