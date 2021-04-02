@@ -54,13 +54,14 @@ export default {
         }
 
         console.log(orderName);
+        console.log(this.$store.state.user.email);
         // const orderCred = {
         //   products: this.$store.getters.cartProducts,
         // };
 
         const response = await AuthService.orderHistory(
           orderName,
-          window.emailAdress
+          this.$store.state.user.email
         );
         console.log(response);
       } catch (error) {
