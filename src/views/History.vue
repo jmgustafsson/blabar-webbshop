@@ -40,7 +40,6 @@ export default {
   methods: {
     async history() {
       const responseHistory = await AuthService.history(window.emailAdress);
-      console.log(responseHistory);
 
       this.orderHistory = responseHistory;
     },

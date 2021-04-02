@@ -171,6 +171,10 @@ export default {
       outline: none;
       color: white;
       cursor: pointer;
+
+      &:active {
+        color: rgb(80, 182, 216);
+      }
     }
 
     i {

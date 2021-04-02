@@ -10,14 +10,9 @@
           class="product-image"
         />
         <p class="product-price">{{ product.product_price }}:-</p>
-        <div class="buyContainer">
-          <button
-            @click="addProductToCart(product)"
-            class="buyContainer-button"
-          >
-            Köp
-          </button>
-        </div>
+        <button @click="addProductToCart(product)" class="buy-button">
+          Köp
+        </button>
       </div>
     </section>
   </div>
@@ -97,21 +92,22 @@ export default {
   }
 }
 
-.buyContainer {
+.buy-button {
   margin-top: 2rem;
-  text-align: center;
+  background: rgb(10, 113, 148);
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 2.5rem;
+  width: 4rem;
 
-  &-button {
-    background: rgb(10, 113, 148);
-    border: 0;
-    border-radius: 10px;
-    outline: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: bold;
-    height: 2.5rem;
-    width: 4rem;
+  &:active {
+    background: rgb(80, 182, 216);
+    transform: translateY(4px);
   }
 }
 </style>

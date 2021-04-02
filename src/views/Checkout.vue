@@ -55,9 +55,6 @@ export default {
             this.$store.dispatch("deleteAllProductsFromCart");
             this.message = "Order placerad";
 
-            console.log(orderName);
-            console.log(this.$store.state.user.email);
-
             const response = await AuthService.orderHistory(
               orderName,
               this.$store.state.user.email
@@ -144,6 +141,11 @@ ul {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
+
+  &:active {
+    background: rgb(80, 182, 216);
+    transform: translateY(4px);
+  }
 }
 
 .clear-button {
@@ -158,5 +160,10 @@ ul {
   height: 2.5rem;
   width: 8rem;
   margin-top: 20px;
+
+  &:active {
+    background: rgb(80, 182, 216);
+    transform: translateY(4px);
+  }
 }
 </style>
