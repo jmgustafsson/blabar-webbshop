@@ -23,7 +23,6 @@ export default new Vuex.Store({
     products: [],
     // {id, quantity}
     cart: [],
-    checkoutStatus: null,
   },
 
   getters: {
@@ -110,15 +109,8 @@ export default new Vuex.Store({
       context.commit("removeProductFromCart", product.product_id);
     },
 
-    deleteAllProductsFromCart(context, product) {
+    deleteAllProductsFromCart(context) {
       context.commit("emptyCart");
-    },
-
-    order({ state, commit }) {
-      shop.buyProducts(state.cart, () => {
-        commit("emptyCart");
-        commit("setCheckoutStatus", "success");
-      });
     },
   },
 
@@ -156,10 +148,6 @@ export default new Vuex.Store({
 
     emptyCart(state) {
       state.cart = [];
-    },
-
-    setCheckoutStatus(state, status) {
-      state.checkoutStatus = status;
     },
   },
 });

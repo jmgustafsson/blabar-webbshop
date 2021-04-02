@@ -14,9 +14,6 @@
       <button @click="placeOrder" class="order-button">
         Beställ
       </button>
-      <p v-if="$store.state.checkoutStatus">
-        {{ $store.state.checkoutStatus }}
-      </p>
       <div>
         <button @click="clearCart" class="clear-button">Rensa Korg</button>
       </div>
@@ -48,16 +45,13 @@ export default {
     async placeOrder() {
       try {
         var orderName = new Array();
-        // let orders = this.$store.getters.cartProducts;
         for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
           orderName.push(this.$store.getters.cartProducts[i].name);
         }
+        this.$store.dispatch("deleteAllProductsFromCart");
 
         console.log(orderName);
         console.log(this.$store.state.user.email);
-        // const orderCred = {
-        //   products: this.$store.getters.cartProducts,
-        // };
 
         const response = await AuthService.orderHistory(
           orderName,
@@ -72,8 +66,8 @@ export default {
       this.$store.dispatch("deleteProductFromCart", product);
     },
 
-    clearCart(product) {
-      this.$store.dispatch("deleteAllProductsFromCart", product);
+    clearCart() {
+      this.$store.dispatch("deleteAllProductsFromCart");
     },
   },
 };

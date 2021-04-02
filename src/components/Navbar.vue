@@ -17,7 +17,6 @@
         </router-link>
         <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
           <button class="nav-buttons">
-            <span v-if="this.$store.getters.isLoggedIn">{{ email }}</span>
             <i class="fas fa-user"></i>
           </button>
         </router-link>
@@ -126,7 +125,7 @@ export default {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
-  margin-left: 50px;
+  margin: auto;
 
   a {
     text-decoration: none;

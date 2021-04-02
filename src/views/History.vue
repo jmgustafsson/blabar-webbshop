@@ -7,16 +7,16 @@
       <table id="firstTable">
         <thead>
           <tr>
-            <th>Order ID</th>
-            <th>Email</th>
-            <th>Product</th>
-            <th>Order placed</th>
+            <th>Order Nr</th>
+            <!-- <th>Email</th> -->
+            <th>Produkter</th>
+            <th>Order datum</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(order, index) in orderHistory" v-bind:key="index">
             <td>{{ order.orderId }}</td>
-            <td>{{ order.userEmail }}</td>
+            <!-- <td>{{ order.userEmail }}</td> -->
             <td>{{ order.product }}</td>
             <td>{{ order.orderPlaced }}</td>
           </tr>
@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 #table-div {
-  width: 50%;
+  width: 750px;
   margin: auto;
 }
 
@@ -79,7 +79,7 @@ table th {
   background: rgb(10, 113, 148);
   color: #fff;
   padding: 8px;
-  min-width: 30px;
+  min-width: 85px;
 }
 
 table td {
