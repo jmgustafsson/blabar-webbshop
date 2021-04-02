@@ -14,6 +14,7 @@
       <button @click="placeOrder" class="order-button">
         Beställ
       </button>
+      <p>{{ message }}</p>
       <div>
         <button @click="clearCart" class="clear-button">Rensa Korg</button>
       </div>
@@ -28,7 +29,7 @@ export default {
   name: "Checkout",
   data() {
     return {
-      orderProducts: [],
+      message: "",
     };
   },
   computed: {
@@ -43,23 +44,32 @@ export default {
 
   methods: {
     async placeOrder() {
-      try {
-        var orderName = new Array();
-        for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
-          orderName.push(this.$store.getters.cartProducts[i].name);
+      if (this.$store.getters.isLoggedIn) {
+        try {
+          var orderName = new Array();
+          for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
+            orderName.push(this.$store.getters.cartProducts[i].name);
+            return (orderName = orderName.filter(
+              this.$store.getters.cartProducts[i]
+            ));
+          }
+
+          this.$store.dispatch("deleteAllProductsFromCart");
+          this.message = "Order placerad";
+
+          console.log(orderName);
+          console.log(this.$store.state.user.email);
+
+          const response = await AuthService.orderHistory(
+            orderName,
+            this.$store.state.user.email
+          );
+          console.log(response);
+        } catch (error) {
+          console.log(error);
         }
-        this.$store.dispatch("deleteAllProductsFromCart");
-
-        console.log(orderName);
-        console.log(this.$store.state.user.email);
-
-        const response = await AuthService.orderHistory(
-          orderName,
-          this.$store.state.user.email
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
+      } else {
+        this.message = "Logga för att beställa";
       }
     },
     removeProduct(product) {
