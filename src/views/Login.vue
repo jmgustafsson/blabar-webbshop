@@ -7,7 +7,7 @@
       <input type="text" placeholder="Användarnamn" v-model="username" />
     </div>
     <div class="textbox">
-      <input type="text" placeholder="Lösenord" v-model="password" />
+      <input type="password" placeholder="Lösenord" v-model="password" />
     </div>
 
     <input class="btn" type="button" @click="login" value="Logga in" />
@@ -27,7 +27,7 @@ export default {
     return {
       username: "",
       password: "",
-      msg: ""
+      msg: "",
     };
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
       try {
         const credentials = {
           username: this.username,
-          password: this.password
+          password: this.password,
         };
 
         window.emailAdress = this.username;
@@ -52,8 +52,8 @@ export default {
       } catch (error) {
         this.msg = error.response.data.msg;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
