@@ -45,28 +45,29 @@ export default {
   methods: {
     async placeOrder() {
       if (this.$store.getters.isLoggedIn) {
-        try {
-          var orderName = new Array();
-          for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
-            orderName.push(this.$store.getters.cartProducts[i].name);
-            return (orderName = orderName.filter(
-              this.$store.getters.cartProducts[i]
-            ));
+        if (this.$store.getters.cartTotal > 0) {
+          try {
+            var orderName = new Array();
+            for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
+              orderName.push(this.$store.getters.cartProducts[i].name);
+            }
+
+            this.$store.dispatch("deleteAllProductsFromCart");
+            this.message = "Order placerad";
+
+            console.log(orderName);
+            console.log(this.$store.state.user.email);
+
+            const response = await AuthService.orderHistory(
+              orderName,
+              this.$store.state.user.email
+            );
+            console.log(response);
+          } catch (error) {
+            console.log(error);
           }
-
-          this.$store.dispatch("deleteAllProductsFromCart");
-          this.message = "Order placerad";
-
-          console.log(orderName);
-          console.log(this.$store.state.user.email);
-
-          const response = await AuthService.orderHistory(
-            orderName,
-            this.$store.state.user.email
-          );
-          console.log(response);
-        } catch (error) {
-          console.log(error);
+        } else {
+          this.message = "Finns inga produkter i korgen";
         }
       } else {
         this.message = "Logga för att beställa";
