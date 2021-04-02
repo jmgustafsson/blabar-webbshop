@@ -17,6 +17,7 @@
         </router-link>
         <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
           <button class="nav-buttons">
+            <span class="logged-user">{{ this.$store.state.user.email }}</span>
             <i class="fas fa-user"></i>
           </button>
         </router-link>
@@ -112,6 +113,16 @@ export default {
 .home-link {
   text-decoration: none;
   color: inherit;
+}
+
+.logged-user {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 15px;
+  position: absolute;
+  width: 2rem;
+  margin-top: -1.5rem;
 }
 
 .checkout-button {

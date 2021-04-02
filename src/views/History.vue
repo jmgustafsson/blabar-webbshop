@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>{{ username }}</h1>
+    <!-- <h1>{{ username }}</h1> -->
     <table id="firstTable">
       <thead>
         <tr>
@@ -64,7 +64,7 @@ table {
   border-collapse: collapse;
   border: 3px solid #44475c;
   width: 600px;
-  margin: auto;
+  margin: 80px auto;
 }
 
 table th {
