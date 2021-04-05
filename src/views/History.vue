@@ -2,12 +2,10 @@
 
 <template>
   <div>
-    <!-- <h1>{{ username }}</h1> -->
     <table id="firstTable">
       <thead>
         <tr>
           <th>Order Nr</th>
-          <!-- <th>Email</th> -->
           <th>Produkter</th>
           <th>Order datum</th>
         </tr>
@@ -15,7 +13,6 @@
       <tbody>
         <tr v-for="(order, index) in orderHistory" v-bind:key="index">
           <td>{{ order.orderId }}</td>
-          <!-- <td>{{ order.userEmail }}</td> -->
           <td>{{ order.product }}</td>
           <td>{{ order.orderPlaced }}</td>
         </tr>
