@@ -5,11 +5,11 @@
       <input type="text" placeholder="Användarnamn" v-model="username" />
     </div>
     <div class="textbox">
-      <input type="text" placeholder="Lösenord" v-model="password" />
+      <input type="password" placeholder="Lösenord" v-model="password" />
     </div>
     <div class="textbox">
       <input
-        type="text"
+        type="password"
         placeholder="Upprepa lösenord"
         v-model="password_repeat"
       />
@@ -28,7 +28,7 @@ export default {
       username: "",
       password: "",
       password_repeat: "",
-      msg: ""
+      msg: "",
     };
   },
 
@@ -38,7 +38,7 @@ export default {
         const credentials = {
           username: this.username,
           password: this.password,
-          password_repeat: this.password_repeat
+          password_repeat: this.password_repeat,
         };
         const response = await AuthService.signUp(credentials);
         this.msg = response.msg;
@@ -47,8 +47,8 @@ export default {
       } catch (error) {
         this.msg = error.response.data.msg;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

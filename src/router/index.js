@@ -5,6 +5,7 @@ import Checkout from "../views/Checkout.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import History from "../views/History.vue";
+import Wildcard from "../views/Wildcard.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/history",
     name: "history",
     component: History,
+  },
+  {
+    path: "*",
+    name: "wildcard",
+    component: Wildcard,
   },
 ];
 

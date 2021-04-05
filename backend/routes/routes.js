@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import express from "express";
-import { showProducts, createProduct } from "../controllers/product.js";
+import { showProducts } from "../controllers/product.js";
 import bcrypt from "bcryptjs";
 import { v4 as uuid } from "uuid";
 import jwt from "jsonwebtoken";
@@ -28,7 +28,6 @@ router.post("/orderhistory", (req, res, next) => {
 router.post("/signup", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
     `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
-      //här
       req.body.username
     )});`,
     (err, result) => {
@@ -47,7 +46,6 @@ router.post("/signup", userMiddleware.validateRegister, (req, res, next) => {
             // has hashed pw => add to database
             db.query(
               `INSERT INTO users (id, email, password, registered) VALUES ('${uuid()}', ${db.escape(
-                // här
                 req.body.username
               )}, ${db.escape(hash)}, now())`,
               (err, result) => {
@@ -136,9 +134,6 @@ router.post("/history", (req, res, next) => {
 
   var queryHistory =
     'SELECT * FROM history WHERE userEmail = "' + emailAdress + '"';
-  // + req.body.email;
-  // var queryHistory = (`SELECT product FROM history WHERE LOWER(userEmail) = ?`, [email]);
-  // sql = mysql.format(`SELECT * FROM history WHERE LOWER(userEmail) = "LOWER(${db.escape(?)});"`,req.body.email)
   console.log(req.body.params.userEmail);
   console.log(queryHistory);
 
@@ -152,7 +147,6 @@ router.post("/history", (req, res, next) => {
         console.log(entry);
       });
       res.json(orderHistory);
-      // console.log(orderHistory);
     }
   });
 });

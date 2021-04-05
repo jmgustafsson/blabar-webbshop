@@ -14,9 +14,7 @@
       <button @click="placeOrder" class="order-button">
         Beställ
       </button>
-      <p v-if="$store.state.checkoutStatus">
-        {{ $store.state.checkoutStatus }}
-      </p>
+      <p>{{ message }}</p>
       <div>
         <button @click="clearCart" class="clear-button">Rensa Korg</button>
       </div>
@@ -31,7 +29,7 @@ export default {
   name: "Checkout",
   data() {
     return {
-      orderProducts: [],
+      message: "",
     };
   },
   computed: {
@@ -46,34 +44,44 @@ export default {
 
   methods: {
     async placeOrder() {
-      try {
-        var orderName = new Array();
-        // let orders = this.$store.getters.cartProducts;
-        for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
-          orderName.push(this.$store.getters.cartProducts[i].name);
+      if (this.$store.getters.isLoggedIn) {
+        if (this.$store.getters.cartTotal > 0) {
+          try {
+            var orderName = new Array();
+            for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
+              orderName.push(
+                " " +
+                  this.$store.getters.cartProducts[i].name +
+                  " " +
+                  this.$store.getters.cartProducts[i].quantity +
+                  "st"
+              );
+            }
+
+            this.$store.dispatch("deleteAllProductsFromCart");
+            this.message = "Order placerad";
+
+            const response = await AuthService.orderHistory(
+              orderName,
+              this.$store.state.user.email
+            );
+            console.log(response);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          this.message = "Finns inga produkter i korgen";
         }
-
-        console.log(orderName);
-        console.log(this.$store.state.user.email);
-        // const orderCred = {
-        //   products: this.$store.getters.cartProducts,
-        // };
-
-        const response = await AuthService.orderHistory(
-          orderName,
-          this.$store.state.user.email
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
+      } else {
+        this.message = "Logga för att beställa";
       }
     },
     removeProduct(product) {
       this.$store.dispatch("deleteProductFromCart", product);
     },
 
-    clearCart(product) {
-      this.$store.dispatch("deleteAllProductsFromCart", product);
+    clearCart() {
+      this.$store.dispatch("deleteAllProductsFromCart");
     },
   },
 };
@@ -139,6 +147,11 @@ ul {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
+
+  &:active {
+    background: rgb(80, 182, 216);
+    transform: translateY(4px);
+  }
 }
 
 .clear-button {
@@ -153,5 +166,10 @@ ul {
   height: 2.5rem;
   width: 8rem;
   margin-top: 20px;
+
+  &:active {
+    background: rgb(80, 182, 216);
+    transform: translateY(4px);
+  }
 }
 </style>

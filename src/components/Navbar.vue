@@ -17,7 +17,7 @@
         </router-link>
         <router-link v-if="this.$store.getters.isLoggedIn" to="/history">
           <button class="nav-buttons">
-            <span v-if="this.$store.getters.isLoggedIn">{{ email }}</span>
+            <span class="logged-user">{{ this.$store.state.user.email }}</span>
             <i class="fas fa-user"></i>
           </button>
         </router-link>
@@ -115,6 +115,16 @@ export default {
   color: inherit;
 }
 
+.logged-user {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 15px;
+  position: absolute;
+  width: 2rem;
+  margin-top: -1.5rem;
+}
+
 .checkout-button {
   background: rgb(10, 113, 148);
   border: 0;
@@ -126,7 +136,7 @@ export default {
   font-weight: bold;
   height: 2.5rem;
   width: 10rem;
-  margin-left: 50px;
+  margin: auto;
 
   a {
     text-decoration: none;
@@ -172,6 +182,10 @@ export default {
       outline: none;
       color: white;
       cursor: pointer;
+
+      &:active {
+        color: rgb(80, 182, 216);
+      }
     }
 
     i {

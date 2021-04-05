@@ -11,15 +11,3 @@ export const getProducts = (result) => {
     }
   });
 };
-
-// Insert Product to Database
-export const insertProduct = (data, result) => {
-  db.query("INSERT INTO product SET ?", [data], (err, results) => {
-    if (err) {
-      console.log(err);
-      result(err, null);
-    } else {
-      result(null, results);
-    }
-  });
-};
