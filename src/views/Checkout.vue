@@ -76,6 +76,7 @@ export default {
         this.message = "Logga för att beställa";
       }
     },
+
     removeProduct(product) {
       this.$store.dispatch("deleteProductFromCart", product);
     },
