@@ -21,11 +21,6 @@
 <script>
 export default {
   name: "Home",
-  data() {
-    return {
-      loading: false,
-    };
-  },
 
   computed: {
     products() {
@@ -40,10 +35,7 @@ export default {
   },
 
   created() {
-    this.loading = true;
-    this.$store.dispatch("getProducts").then(() => {
-      this.loading = false;
-    });
+    return this.$store.dispatch("getProducts");
   },
 };
 </script>
