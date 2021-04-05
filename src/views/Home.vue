@@ -6,7 +6,7 @@
         <h3 class="product-header">{{ product.product_name }}</h3>
         <img
           src="https://fakeimg.pl/150x150"
-          :alt="product.name"
+          :alt="placeholderimg"
           class="product-image"
         />
         <p class="product-price">{{ product.product_price }}:-</p>
