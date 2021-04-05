@@ -49,7 +49,13 @@ export default {
           try {
             var orderName = new Array();
             for (let i = 0; i < this.$store.getters.cartProducts.length; i++) {
-              orderName.push(this.$store.getters.cartProducts[i].name);
+              orderName.push(
+                " " +
+                  this.$store.getters.cartProducts[i].name +
+                  " " +
+                  this.$store.getters.cartProducts[i].quantity +
+                  "st"
+              );
             }
 
             this.$store.dispatch("deleteAllProductsFromCart");
