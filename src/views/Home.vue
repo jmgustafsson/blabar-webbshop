@@ -4,11 +4,7 @@
     <section class="products">
       <div v-for="product in products" :key="product.id" class="product">
         <h3 class="product-header">{{ product.product_name }}</h3>
-        <img
-          src="https://fakeimg.pl/150x150"
-          :alt="placeholderimg"
-          class="product-image"
-        />
+        <img src="https://fakeimg.pl/150x150" class="product-image" />
         <p class="product-price">{{ product.product_price }}:-</p>
         <button @click="addProductToCart(product)" class="buy-button">
           Köp
@@ -32,10 +28,6 @@ export default {
     addProductToCart(product) {
       this.$store.dispatch("addProductToCart", product);
     },
-  },
-
-  created() {
-    return this.$store.dispatch("getProducts");
   },
 };
 </script>
