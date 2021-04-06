@@ -15,23 +15,20 @@ export default {
       .post(url + "signup/", credentials)
       .then((response) => response.data);
   },
-  getSecretContent() {
-    return axios.get(url + "secret-route/").then((response) => response.data);
-  },
-  history(emailAdress) {
+  history(userName) {
     return axios
       .post(url + "history/", {
         params: {
-          userEmail: emailAdress,
+          user: userName,
         },
       })
       .then((response) => response.data);
   },
-  orderHistory(products, emailAdress) {
+  orderHistory(products, userName) {
     return axios
       .post(url + "orderhistory/", {
         params: {
-          user: emailAdress,
+          user: userName,
           orderProducts: products,
         },
       })

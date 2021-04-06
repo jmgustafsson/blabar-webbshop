@@ -61,11 +61,10 @@ export default {
             this.$store.dispatch("deleteAllProductsFromCart");
             this.message = "Order placerad";
 
-            const response = await AuthService.orderHistory(
+            await AuthService.orderHistory(
               orderName,
               this.$store.state.user.email
             );
-            console.log(response);
           } catch (error) {
             console.log(error);
           }

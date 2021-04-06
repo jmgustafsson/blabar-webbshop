@@ -124,18 +124,11 @@ router.post("/login", (req, res, next) => {
   );
 });
 
-router.get("/secret-route", userMiddleware.isLoggedIn, (req, res, next) => {
-  console.log(req.userData);
-  res.send("This is the secret content. Only logged in users can see that!");
-});
-
 router.post("/history", (req, res, next) => {
-  var emailAdress = req.body.params.userEmail;
+  var userName = req.body.params.user;
 
   var queryHistory =
-    'SELECT * FROM history WHERE userEmail = "' + emailAdress + '"';
-  console.log(req.body.params.userEmail);
-  console.log(queryHistory);
+    'SELECT * FROM history WHERE userEmail = "' + userName + '"';
 
   db.query(queryHistory, (err, data, fields) => {
     if (err) throw err;
@@ -144,7 +137,6 @@ router.post("/history", (req, res, next) => {
 
       data.forEach(function(entry) {
         orderHistory.push(entry);
-        console.log(entry);
       });
       res.json(orderHistory);
     }

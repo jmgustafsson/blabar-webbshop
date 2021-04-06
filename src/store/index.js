@@ -69,7 +69,6 @@ export default new Vuex.Store({
   actions: {
     // = methods
     login: ({ commit, dispatch }, { token, user }) => {
-      console.log(dispatch);
       commit("SET_TOKEN", token);
       commit("SET_USER", user);
 

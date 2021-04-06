@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       orderHistory: "",
-      username: "",
     };
   },
 
@@ -47,10 +46,6 @@ export default {
       this.$router.push("/login");
     }
     this.history();
-
-    this.username = this.$store.getters.getUser.email;
-
-    this.secretMessage = await AuthService.getSecretContent();
   },
 };
 </script>
